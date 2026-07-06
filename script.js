@@ -243,34 +243,41 @@ if (!prefersReducedMotion) {
 // ============================================
 const projectData = [
   {
-    tag: "Web App",
+    tag: "Web Development",
+    year: "2024",
+    title: "GoalDrul",
+    desc: "A web-based football competition management system designed to simplify tournament organization.",
+    detail: "Administrators can manage teams, set up match schedules, track standings, record fixtures, and input match results through an intuitive dashboard. The system automates bracket generation and updates the leaderboard in real-time after each result is entered.",
+    stack: ["HTML", "JavaScript", "MySQL", "PHP", "Bootstrap"],
+    source: "https://github.com/Thomidz/goaldruldc.git"
+  },
+  {
+    tag: "Machine Learning",
     year: "2026",
-    title: "Coursework Task Manager",
-    desc: "A web app for tracking coursework deadlines with reminders, priority labels, and a weekly calendar view.",
-    detail: "Built a full-stack task management application to help students stay on top of academic deadlines. Features include recurring reminders, priority tagging, a weekly calendar view, and progress tracking across courses.",
-    stack: ["React", "Node.js", "Express", "MongoDB"],
-    demo: "#",
-    source: "#"
+    title: "SmartFit",
+    desc: "Food recommendation app built as the final capstone project for DBS Coding Camp.",
+    detail: "Uses a content-based filtering recommendation algorithm combined with data preprocessing techniques (normalization, feature encoding) to deliver personalized food suggestions based on user preferences, dietary goals, and caloric targets. The dataset was cleaned and preprocessed using Pandas before being fed into the Scikit-Learn pipeline.",
+    stack: ["Python", "Pandas", "Scikit-Learn", "Jupyter Notebook"],
+    demo: "https://smartfit-app.vercel.app/",
+    source: "https://github.com/susenayw/SmartFit.git"
   },
   {
-    tag: "Algorithms",
+    tag: "Mobile Development",
     year: "2025",
-    title: "Sorting Algorithm Visualizer",
-    desc: "An interactive learning tool that shows bubble sort, merge sort, and quick sort step by step, visually.",
-    detail: "Designed and built an in-browser visualizer that animates classic sorting algorithms frame-by-frame. Users can adjust array size and speed, pause, and step through each comparison manually.",
-    stack: ["JavaScript", "Canvas API", "HTML", "CSS"],
-    demo: "#",
-    source: "#"
+    title: "JagaJiwa",
+    desc: "Flutter mobile app supporting public awareness campaigns against online gambling.",
+    detail: "JagaJiwa provides educational content about the dangers of online gambling, an anonymous reporting feature for users to flag suspicious platforms, and curated resources such as hotlines and counseling links. The app integrates Firebase for real-time data sync and user authentication, and was designed with a clean, accessible UI to reach a broad demographic.",
+    stack: ["Flutter", "Dart", "Firebase", "Figma"],
+    source: "https://github.com/garmandsk/jagajiwa.git"
   },
   {
-    tag: "Database",
+    tag: "Game Development",
     year: "2025",
-    title: "Library Lending System",
-    desc: "A relational database design and simple interface for tracking book loans and returns at a campus library.",
-    detail: "Designed the entity-relationship model and normalized schema for a campus library system, then built a simple PHP interface for librarians to manage loans, returns, and overdue notices.",
-    stack: ["MySQL", "PHP", "Bootstrap", "HTML"],
-    demo: "#",
-    source: "#"
+    title: "UNBIRD",
+    desc: "2D arcade game inspired by Flappy Bird — control a plane, dodge obstacles, and shoot enemies for the highest score.",
+    detail: "Developed independently using Unity 6.2. The game features procedurally generated obstacle patterns with increasing difficulty, an enemy shooting mechanic where enemies fire projectiles back at the player, pixel art assets created from scratch, a parallax scrolling background, and a persistent high-score system. Audio feedback and screen shake effects add game-feel polish.",
+    stack: ["Unity 6.2", "C#", "TextMesh Pro", "Pixel Art"],
+    source: "https://github.com/Thomidz/DERGEN.git"
   }
 ];
 
@@ -287,8 +294,43 @@ function openModal(idx) {
   document.getElementById("modal-detail").textContent = p.detail;
   const stackEl = document.getElementById("modal-stack");
   stackEl.innerHTML = p.stack.map(s => `<li>${s}</li>`).join("");
-  document.getElementById("modal-demo").href   = p.demo;
-  document.getElementById("modal-source").href = p.source;
+
+  const demoBtn   = document.getElementById("modal-demo");
+  const sourceBtn = document.getElementById("modal-source");
+  const playBtn   = document.getElementById("modal-play");
+
+  // Live demo — hanya tampil jika ada URL
+  if (p.demo) {
+    demoBtn.href = p.demo;
+    demoBtn.style.display = "inline-flex";
+  } else {
+    demoBtn.style.display = "none";
+  }
+
+  // Source code — selalu tampil jika ada
+  if (p.source) {
+    sourceBtn.href = p.source;
+    sourceBtn.style.display = "inline-flex";
+  } else {
+    sourceBtn.style.display = "none";
+  }
+
+  // Play game — hanya tampil jika ada playUrl
+  if (p.playUrl && playBtn) {
+    playBtn.href = p.playUrl;
+    playBtn.style.display = "inline-flex";
+  } else if (playBtn) {
+    playBtn.style.display = "none";
+  }
+
+  // Style the modal box for game projects
+  const box = document.querySelector(".modal-box");
+  if (p.tag === "Game Development") {
+    box.classList.add("modal-box--game");
+  } else {
+    box.classList.remove("modal-box--game");
+  }
+
   modalOverlay.classList.add("is-open");
   document.body.style.overflow = "hidden";
   modalClose.focus();
